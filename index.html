@@ -61,7 +61,7 @@
    RESET & BASE
 ═══════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* scroll-behavior handled via JS to avoid overflow-x:hidden breaking it */
 body {
   background: var(--bg);
   color: var(--ink);
@@ -2928,6 +2928,28 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
   // Close on Escape key
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  // ── Smooth scroll (JS-based — CSS scroll-behavior breaks when body has overflow-x:hidden) ──
+  function smoothScrollTo(hash) {
+    const target = document.querySelector(hash);
+    if (!target) return;
+    const navEl  = document.getElementById('nav');
+    const offset = navEl ? navEl.offsetHeight + 8 : 88;
+    const top    = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  // Intercept every internal anchor link on the page
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const hash = a.getAttribute('href');
+    if (!hash || hash === '#') return;
+    // Let the mobile-menu handler deal with its own links (needs delay)
+    if (a.closest('#mobileMenu')) return;
+    e.preventDefault();
+    smoothScrollTo(hash);
+  });
+
   // Mobile nav toggle
   const navToggle  = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -2937,10 +2959,16 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
     document.body.style.overflow = open ? 'hidden' : '';
   });
   mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
+    a.addEventListener('click', e => {
+      const hash = a.getAttribute('href');
       mobileMenu.classList.remove('open');
       navToggle.classList.remove('open');
       document.body.style.overflow = '';
+      if (hash && hash.startsWith('#') && hash !== '#') {
+        e.preventDefault();
+        // Wait for the menu slide-out transition (400ms) before scrolling
+        setTimeout(() => smoothScrollTo(hash), 430);
+      }
     });
   });
 </script>

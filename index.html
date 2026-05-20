@@ -738,8 +738,6 @@ section[id] { scroll-margin-top: 80px; }
 }
 .menu-item:hover { border-color: var(--accent); color: var(--ink); transform: translateY(-1px); }
 .menu-item.selected { background: var(--accent); border-color: var(--accent); color: var(--bg); transform: translateY(-1px); }
-.menu-item .itm-price { font-size: 10px; opacity: .65; }
-.menu-item.selected .itm-price { opacity: .8; }
 /* Builder summary box */
 .builder-summary .sum-box { position: sticky; top: 96px; background: var(--ink); color: var(--bg); border-radius: 6px; padding: 32px; }
 .sum-box h4 { font-family: var(--sans); font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold-2); margin-bottom: 20px; font-weight: 500; }
@@ -2747,7 +2745,7 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
       sc.innerHTML = `<div class="subcat-name">${sub.name}<span>₹${sub.price}/guest per dish</span></div>`
         + `<div class="items-grid">`
         + sub.items.map(item =>
-          `<div class="menu-item" data-item="${item}" data-price="${sub.price}">${item}<span class="itm-price">+₹${sub.price}</span></div>`
+          `<div class="menu-item" data-item="${item}" data-price="${sub.price}">${item}</div>`
         ).join('') + `</div>`;
       panel.appendChild(sc);
     });

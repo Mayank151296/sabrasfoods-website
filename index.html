@@ -2108,7 +2108,7 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
     <div class="builder-head reveal">
       <span class="eyebrow">Craft your feast</span>
       <h2>Build your <em>own</em> menu.</h2>
-      <p>Hand-pick every dish from our full menu. See an instant per-guest estimate, then send it to our team for a confirmed quote within 24 hours.</p>
+      <p>Hand-pick every dish from our full menu, tell us how many guests, and we'll send you a confirmed quote over WhatsApp within 24 hours.</p>
     </div>
 
     <div class="builder-layout">
@@ -2125,16 +2125,10 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
             <label>Guests</label>
             <input type="number" id="guestCount" value="100" min="30" max="4000">
           </div>
-          <div class="est-row">
-            <span class="elabel">Est. per guest</span>
-            <span class="eamt" id="perGuestAmt">₹0</span>
-          </div>
-          <div class="est-row total-row">
-            <span class="elabel">Est. total</span>
-            <span class="total-eamt" id="totalAmt">₹0</span>
-          </div>
-          <button class="btn build-cta" id="buildCta">Send for Quote →</button>
-          <p class="est-note">*Estimates are indicative. Final pricing confirmed by our team within 24 hours.</p>
+          <button class="btn build-cta" id="buildCta">
+            <svg width="18" height="18" style="flex-shrink:0"><use href="#ico-wa"/></svg>
+            Get Quote on WhatsApp
+          </button>
         </div>
       </div>
     </div>
@@ -2774,23 +2768,17 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
   }
 
   function updateSummary() {
-    const items  = Object.entries(sel);
-    const empty  = document.getElementById('sumEmpty');
-    const list   = document.getElementById('sumList');
-    const guests = parseInt(document.getElementById('guestCount').value) || 100;
+    const items = Object.keys(sel);
+    const empty = document.getElementById('sumEmpty');
+    const list  = document.getElementById('sumList');
     if (!items.length) {
       empty.style.display = ''; list.style.display = 'none';
-      document.getElementById('perGuestAmt').textContent = '₹0';
-      document.getElementById('totalAmt').textContent    = '₹0';
       return;
     }
     empty.style.display = 'none'; list.style.display = '';
-    list.innerHTML = items.map(([name, price]) =>
-      `<li><span>${name}</span><span style="display:flex;align-items:center;gap:8px"><span style="color:#5A5040;font-size:11px">+₹${price}/guest</span><button class="sum-rm" data-rm="${name}">×</button></span></li>`
+    list.innerHTML = items.map(name =>
+      `<li><span>${name}</span><button class="sum-rm" data-rm="${name}">×</button></li>`
     ).join('');
-    const perGuest = BASE_PER_GUEST + items.reduce((s, [, p]) => s + p, 0);
-    document.getElementById('perGuestAmt').textContent = fmtINR(perGuest);
-    document.getElementById('totalAmt').textContent    = fmtINR(perGuest * guests);
   }
 
   // Remove via summary
@@ -2806,14 +2794,14 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
   document.getElementById('guestCount').addEventListener('input', updateSummary);
 
   document.getElementById('buildCta').addEventListener('click', e => {
-    const items = Object.keys(sel);
-    if (!items.length) { e.preventDefault(); alert('Please select at least one dish first.'); return; }
-    const guests = document.getElementById('guestCount').value;
-    const ta = document.querySelector('.contact-form textarea');
-    if (ta) ta.value = `Custom Menu Request (${guests} guests):\n\n${items.join(', ')}\n\nPlease provide a formal quote.`;
-    const gi = document.querySelector('.contact-form input[type="number"]');
-    if (gi) gi.value = guests;
-    window.location.href = '#contact';
+    e.preventDefault();
+    const items  = Object.keys(sel);
+    if (!items.length) { alert('Please select at least one dish first.'); return; }
+    const guests = parseInt(document.getElementById('guestCount').value) || 100;
+    const msg = `Hi Sabras! I've built a custom menu for *${guests} guests* using your menu builder:\n\n` +
+      items.map(i => `• ${i}`).join('\n') +
+      `\n\nCould you please share a quote for this menu?`;
+    window.open('https://wa.me/919607712123?text=' + encodeURIComponent(msg), '_blank');
   });
 
   // ── Testimonial slider ─────────────────────────────

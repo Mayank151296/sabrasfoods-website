@@ -592,6 +592,57 @@ section[id] { scroll-margin-top: 80px; }
 @media (max-width: 480px)  { .sig-grid { grid-template-columns: 1fr; } }
 
 /* ═══════════════════════════════════════════
+   BOX MEALS
+═══════════════════════════════════════════ */
+.box-meals { background: #1A1510; color: #F0E8D8; }
+.box-meals .eyebrow { color: var(--gold-2); }
+.bm-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap; }
+.bm-head h2 { color: #F0E8D8; max-width: 520px; margin-top: 16px; }
+.bm-head h2 em { font-style: italic; color: var(--gold-2); }
+.bm-head .bm-intro { max-width: 380px; font-size: 15px; line-height: 1.75; color: #9E8E7C; }
+
+/* How-it-works strip */
+.bm-steps { display: flex; gap: 0; margin-bottom: 64px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; overflow: hidden; }
+.bm-step { flex: 1; padding: 28px 24px; border-right: 1px solid rgba(255,255,255,.07); position: relative; }
+.bm-step:last-child { border-right: none; }
+.bm-step-num { font-family: var(--serif); font-size: 36px; color: rgba(192,149,53,.25); line-height: 1; margin-bottom: 10px; }
+.bm-step h4 { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-2); margin-bottom: 6px; }
+.bm-step p { font-size: 13px; color: #7A6E5E; line-height: 1.6; }
+
+/* Box cards */
+.bm-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 48px; }
+.bm-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; transition: all .3s; }
+.bm-card:hover { background: rgba(255,255,255,.07); transform: translateY(-3px); border-color: rgba(192,149,53,.3); }
+.bm-card.featured { border-color: rgba(192,149,53,.5); background: rgba(192,149,53,.06); }
+.bm-card-hd { padding: 28px 28px 20px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.bm-card-hd .bm-tag { display: inline-block; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: #7A6E5E; margin-bottom: 10px; }
+.bm-card.featured .bm-card-hd .bm-tag { color: var(--gold-2); }
+.bm-card-hd h3 { font-family: var(--serif); font-size: 28px; color: #F0E8D8; font-weight: 400; margin-bottom: 6px; }
+.bm-card-hd .bm-sub { font-size: 13px; color: #7A6E5E; line-height: 1.5; }
+.bm-card-body { padding: 24px 28px 28px; }
+.bm-includes { list-style: none; }
+.bm-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #C5B89A; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.04); line-height: 1.4; }
+.bm-includes li:last-child { border-bottom: none; }
+.bm-includes li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); margin-top: 5px; flex-shrink: 0; }
+
+/* Min order badge */
+.bm-min { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #5A5040; letter-spacing: .06em; margin-top: 14px; }
+.bm-min::before { content: ''; display: inline-block; width: 14px; height: 1px; background: #5A5040; }
+
+/* CTA row */
+.bm-cta-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.bm-note { font-size: 13px; color: #5A5040; line-height: 1.6; }
+
+@media (max-width: 960px) {
+  .bm-head { flex-direction: column; gap: 20px; }
+  .bm-head .bm-intro { max-width: 100%; }
+  .bm-steps { flex-direction: column; border-radius: 6px; }
+  .bm-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .bm-step:last-child { border-bottom: none; }
+  .bm-cards { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
    PACKAGES  (accordion cards)
 ═══════════════════════════════════════════ */
 .menu-head { text-align: center; max-width: 680px; margin: 0 auto 72px; }
@@ -1270,6 +1321,7 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
       <a href="#about">About</a>
       <a href="#cuisines">Cuisines</a>
       <a href="#services">Services</a>
+      <a href="#box-meals">Box Meals</a>
       <a href="#menu">Packages</a>
       <a href="#build-menu">Build Menu</a>
       <a href="#gallery">Gallery</a>
@@ -1290,6 +1342,7 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
     <a href="#about">About</a>
     <a href="#cuisines">Cuisines</a>
     <a href="#services">Services</a>
+    <a href="#box-meals">Box Meals</a>
     <a href="#menu">Packages</a>
     <a href="#build-menu">Build Menu</a>
     <a href="#gallery">Gallery</a>
@@ -1673,6 +1726,117 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ BOX MEALS ═══════════════════ -->
+<section class="section box-meals" id="box-meals">
+  <div class="container">
+
+    <div class="bm-head reveal">
+      <div>
+        <span class="eyebrow">New service</span>
+        <h2>Fresh meals, boxed &amp;<br><em>delivered</em> to your door.</h2>
+      </div>
+      <p class="bm-intro">Hosting a puja, birthday, kitty party, or office lunch? We prepare restaurant-quality meals, pack them fresh, and deliver right to your venue — no setup, no staff, no fuss. Starting at just 20 boxes.</p>
+    </div>
+
+    <!-- How it works -->
+    <div class="bm-steps reveal">
+      <div class="bm-step">
+        <div class="bm-step-num">01</div>
+        <h4>WhatsApp Us</h4>
+        <p>Tell us your menu preference, number of boxes, and delivery date &amp; address.</p>
+      </div>
+      <div class="bm-step">
+        <div class="bm-step-num">02</div>
+        <h4>We Confirm</h4>
+        <p>We send back a quote and confirm your order within a few hours.</p>
+      </div>
+      <div class="bm-step">
+        <div class="bm-step-num">03</div>
+        <h4>Freshly Prepared</h4>
+        <p>Meals are cooked fresh on the day of delivery — no pre-made food.</p>
+      </div>
+      <div class="bm-step">
+        <div class="bm-step-num">04</div>
+        <h4>Hot &amp; On Time</h4>
+        <p>Packed in insulated boxes and delivered to your door at the agreed time.</p>
+      </div>
+    </div>
+
+    <!-- Box options -->
+    <div class="bm-cards reveal">
+
+      <div class="bm-card">
+        <div class="bm-card-hd">
+          <div class="bm-tag">Ghar Box</div>
+          <h3>Everyday Meal</h3>
+          <p class="bm-sub">Simple, wholesome, home-style — perfect for small gatherings &amp; office lunches.</p>
+        </div>
+        <div class="bm-card-body">
+          <ul class="bm-includes">
+            <li>Dal Fry or Dal Tadka</li>
+            <li>Sabzi of the day (seasonal vegetable)</li>
+            <li>Steamed Rice</li>
+            <li>Phulka (4 pcs)</li>
+            <li>Green Salad &amp; Pickle</li>
+          </ul>
+          <div class="bm-min">Minimum 20 boxes</div>
+        </div>
+      </div>
+
+      <div class="bm-card featured">
+        <div class="bm-card-hd">
+          <div class="bm-tag">⭐ Dawat Box · Most Popular</div>
+          <h3>Occasion Meal</h3>
+          <p class="bm-sub">A satisfying spread for celebrations, pujas, and house parties.</p>
+        </div>
+        <div class="bm-card-body">
+          <ul class="bm-includes">
+            <li>Dal Makhani</li>
+            <li>Paneer Masala</li>
+            <li>Mix Veg</li>
+            <li>Steamed Rice &amp; Jeera Rice</li>
+            <li>Phulka (4 pcs)</li>
+            <li>Gulab Jamun</li>
+            <li>Salad, Papad &amp; Pickle</li>
+          </ul>
+          <div class="bm-min">Minimum 30 boxes</div>
+        </div>
+      </div>
+
+      <div class="bm-card">
+        <div class="bm-card-hd">
+          <div class="bm-tag">Celebration Box</div>
+          <h3>Premium Meal</h3>
+          <p class="bm-sub">For birthdays, anniversaries, and special occasions that deserve a little extra.</p>
+        </div>
+        <div class="bm-card-body">
+          <ul class="bm-includes">
+            <li>Dal Makhani</li>
+            <li>Paneer Special (Shahi / Tikka Masala)</li>
+            <li>Mix Veg or Aloo Sabzi</li>
+            <li>Veg Pulav &amp; Steamed Rice</li>
+            <li>Phulka (4 pcs) &amp; Puri (2 pcs)</li>
+            <li>Gulab Jamun &amp; Seasonal Sweet</li>
+            <li>Salad, Papad &amp; 2 Chutneys</li>
+          </ul>
+          <div class="bm-min">Minimum 30 boxes</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bm-cta-row reveal">
+      <a href="https://wa.me/919607712123?text=Hi%20Sabras!%20I%27d%20like%20to%20order%20boxed%20meals%20for%20my%20event.%20Could%20you%20please%20share%20details%20and%20pricing%3F"
+         class="btn btn-wa" target="_blank" rel="noopener">
+        <svg width="18" height="18"><use href="#ico-wa"/></svg>
+        Order Box Meals on WhatsApp
+      </a>
+      <p class="bm-note">Available across Pune · Custom menus available · Jain &amp; dietary options on request</p>
+    </div>
+
   </div>
 </section>
 

@@ -1282,6 +1282,9 @@ footer { background: #120E09; color: #9E8E7C; padding: 64px 0 40px; }
 }
 
 </style>
+<!-- When shown inside danka.agency (?embed=danka), hide the floating WhatsApp button. Normal visits are unchanged. -->
+<script>(function(){try{var q=new URLSearchParams(location.search);if(q.get("embed")==="danka")sessionStorage.setItem("embed","danka");if(sessionStorage.getItem("embed")==="danka")document.documentElement.classList.add("embed-danka")}catch(e){}})();</script>
+<style>.embed-danka .fab{display:none!important}</style>
 </head>
 <body>
 
